@@ -1,0 +1,80 @@
+.ProductInfoPage{
+height: 90%; /* Magic here */
+width: 90%;
+margin: auto;
+background-color: rgb(218, 224, 224);
+}
+/*
+height: 1000px; 
+width: 90%;
+*/
+
+.PicNamePrice{
+}
+
+.ProductPicture{
+    margin-top: 20px;
+    max-width: 150px;
+}
+
+div.PictureDescription ul li{
+display:block;
+list-style-type: none;
+}
+
+div.PicNamePrice ul li{
+display:block;
+}
+
+.UserReviewsAndAddUserReviews{    
+    display: flex;
+    flex-direction: column;
+    margin-top: 500px;
+    margin-left: 35%;
+    gap: 10px;
+}
+
+
+.AddUserReview{
+    height: 100px;
+    width: 500px;
+    border: 1px solid black;
+    overflow-y: scroll;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);    
+}
+
+.ReviewText{
+    width: 80%;
+    height: 50px;
+}
+
+.UserReviews{
+    height: 100px;
+    width: 500px;
+    border: 1px solid black;
+    overflow-y: scroll;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    background-color: rgb(255, 255, 255);
+}
+
+.UserName{
+    font-size: 15px;
+    text-align: start;
+    vertical-align: top;
+}
+.Stars{
+    text-align: end;
+}
+.Review{
+    font-size: 12px;
+    text-align: start;
+    overflow-wrap: break-word;
+    margin-bottom: 3px;
+}
+div.NameAndPrice ul li{
+    display: block;
+    list-style-type: none;
+}
+

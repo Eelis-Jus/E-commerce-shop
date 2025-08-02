@@ -1,0 +1,38 @@
+.ProductCard{
+    border-radius: 0px;
+    width: 150px;
+    margin-top: 10px;
+    margin-left: 10px;
+    
+}
+.ProductCard:hover{
+background: rgb(197, 193, 193); /* make this whatever you want */
+}
+.ProductCard_List{
+display: flex; 
+flex-direction: row;
+list-style-type: none;
+
+}
+.ProductName{
+    display: flex;
+    justify-content: center;
+
+}
+.ProductPrice{
+     display: flex;
+    justify-content: center;
+
+}
+.ProductPhotoBackground{
+   width: 100%;
+   height: 90%;
+   background-color: rgb(197, 193, 193); 
+}
+.ProductPhoto{
+    align-self: center;
+    width: 100px;
+    height: 100px;
+    margin-top: 6px;
+    border-radius: 0px;
+}

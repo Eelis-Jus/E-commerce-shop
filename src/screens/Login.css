@@ -1,0 +1,14 @@
+.LoginPage{
+    width: 1250px;
+    height: 700px;
+    padding-top: 100px;
+    margin: auto;
+}
+
+.registerationFields{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    list-style-type: none;
+}
