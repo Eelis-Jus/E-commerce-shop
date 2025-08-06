@@ -73,7 +73,7 @@ const removeItemFromStock = (req, res) => {
 
 const createItem = (req, res) => {
     const { item_name, amount_in_stock, price, description, category } = req.body;
-    pool.query('INSERT INTO item (item_name, amount_in_stock, price, description, category) VALUES ($1, $2, $3, $4)', [item_name, amount_in_stock, price, description, category], (error, results) => {
+    pool.query('INSERT INTO item (item_name, amount_in_stock, price, description, category) VALUES ($1, $2, $3, $4, $5)', [item_name, amount_in_stock, price, description, category], (error, results) => {
         if (error) {
             logwriter.ErrorLogWriter(`${error}`)
             throw error

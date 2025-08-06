@@ -32,14 +32,15 @@ let currentTimeAndDate =  year + "-" + month + "-" + date + " " + hours + ":" + 
 
 const ServerLogWriter = (Serverlog) =>{
 
-  const serverWriter = fs.createWriteStream('../server/server_logs/server.txt', {flags : 'w'}); //try flags a, so that it makes the file even if it doesn't exist
-  const serverMessage = currentTimeAndDate+ " | "+ Serverlog+"\n";
+  const serverWriter = fs.createWriteStream('../server/server_logs/server.log', {flags : 'a'}); //try flags a, so that it makes the file even if it doesn't exist
+  const serverMessage = currentTimeAndDate+ " | "+ Serverlog;
 
-  serverWriter.write(serverMessage)
+  serverWriter.write(serverMessage+"\r\n")
   serverWriter.end()
 
   // Handle finish event
   serverWriter.on('finish', () => {
+    console.log(currentTimeAndDate)
     console.log('Write completed.')
   })
 
@@ -52,7 +53,7 @@ const ServerLogWriter = (Serverlog) =>{
 
 const ErrorLogWriter = (Errorlog) =>{
 
-  const errorWriter = fs.createWriteStream('../server/server_logs/error.txt', {flags : 'w'});    //try flags a, so that it makes the file even if it doesn't exist
+  const errorWriter = fs.createWriteStream('../server/server_logs/error.log', {flags : 'a'});    //try flags a, so that it makes the file even if it doesn't exist
   const errorMessage = currentTimeAndDate+ " | "+ Errorlog+"\n";
 
   errorWriter.write(errorMessage)

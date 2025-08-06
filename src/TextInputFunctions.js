@@ -6,7 +6,7 @@ const characterlimiter = (event, Length, setstate) =>{
 }
 
 const inputCheck = (isnumber, Minlength, testString, elementName) =>{
-    newstring=testString.replace(/\s+/g, ''); //remove whitespaces from string so you can't make x just whitespaces
+    let newstring=testString.replace(/\s+/g, ''); //remove whitespaces from string so you can't make x just whitespaces
     const myarray = newstring.split("")
 
     if(myarray.Length<Minlength){

@@ -26,9 +26,11 @@ const jwtMaker = (req,res) => {
         const LastName=results.rows[0].lastname;    
 
         const user={userid: userid, email: userEmail, username: userName, firstname: FirstName, lastname: LastName};
-        const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)        
+        const accessToken = generateAccessToken(user)
+        const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)     
         res.cookie('token', accessToken, { httpOnly: true });
-        res.json({ accessToken });
+        res.cookie('refreshtoken', refreshToken, {httpOnly: true});
+        res.json({ accessToken: accessToken, refreshToken: refreshToken });
     })
 }
 
@@ -44,7 +46,12 @@ function authenticateToken(req,res,next){
     })
 }
 
+function generateAccessToken(user){
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '10m'})
+}
+
 module.exports={
     jwtMaker,
-    authenticateToken
+    authenticateToken,
+    generateAccessToken
 }
