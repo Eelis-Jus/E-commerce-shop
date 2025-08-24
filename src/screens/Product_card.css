@@ -1,4 +1,10 @@
 .ProductCard{
+    word-wrap: break-word;
+    width: 150px;
+    max-width: 160px;  
+}
+/*
+.ProductCard{
     border-radius: 0px;
     word-wrap: break-word;
     width: 150px;
@@ -7,16 +13,31 @@
     margin-top: 10px;
     margin-left: 10px;
     
-}
+
+
+*/
 .ProductCard:hover{
 background: rgb(197, 193, 193); /* make this whatever you want */
 }
 .ProductCard_List{
+ display: grid;
+ margin-left: 80px;
+ align-content: center;
+ list-style-type: none;
+  grid-template-columns: auto auto auto auto auto auto auto;
+  grid-gap: 10px;
+  padding: 10px;
+}
+/*
+.ProductCard_List{
+display: grid; 
+grid: 10px;
 display: flex; 
 flex-direction: row;
 list-style-type: none;
 
-}
+
+*/
 .ProductName{
     display: flex;
     justify-content: center;

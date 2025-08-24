@@ -9,6 +9,7 @@ import Login from './screens/Login';
 import ProductCard from './screens/Product_card';
 import Register from './screens/Register';
 import ProductInfo from './screens/Product_info';
+import { CookiesProvider } from 'react-cookie';
 
 //https://www.youtube.com/watch?v=SLfhMt5OUPI
 
@@ -52,9 +53,9 @@ element: <Register/>
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-  <App />
- </BrowserRouter>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
   </React.StrictMode>
 );
 

@@ -1,3 +1,4 @@
+
 const characterlimiter = (event, Length, setstate) =>{
     if(event.target.value.length > Length) {
         return true;
@@ -28,13 +29,9 @@ const inputCheck = (isnumber, Minlength, testString, elementName) =>{
                 return(`${elementName} can only include normal letters and whitespaces`)
             }
         }
-
         return true;
-
     }
-
 }
-
 
 let testString='hdjsfoaueahogwuiewaghoiufhnaoglkjhwepganuawepougnhiopjmegrstrfeayuihowwdetuasfgfgtueyrshrotyuijyuipthojkuipoylkop,uiåjigkmypuohfgjnuighybuidf64t578r7589y680i6u79ijkpyuohjnufgghdbyfigyijuhotjipmyuweouthnmohtweiumaahrdsjaekiuglpiuöguyrdhrwqahqwehtrejyrtktyuiklryujjnmnbvdfgiytefghkkjhgfddfughfiyubsdinvpernmgbpfyhjoprusehygiywegfysdbghrlejhpfgkhpoifgmdpklhngfhnperhtoiuhewoathfgdfhgouierhp'
 

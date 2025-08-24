@@ -49,7 +49,7 @@ const sessionstoragemapper = () =>{
         console.log("item: "+myArray[0]);
         price.push(parseInt(myArray[1]));
         cartItems.push(myArray[0]);
-        console.log("items: "+cartItems);
+        console.log("items: "+'{'+cartItems.toString()+'}');
         }
 };
 

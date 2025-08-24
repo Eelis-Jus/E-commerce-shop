@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router";
 import './Product_card.css';
+import { CookiesProvider } from 'react-cookie';
 
 const ProductCard = () => {
 
@@ -35,7 +36,6 @@ const ProductCard = () => {
         </div>
         ))}
       </ul>
-      
     );
 };
 export default ProductCard;

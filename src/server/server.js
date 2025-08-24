@@ -8,6 +8,8 @@ const cors=require("cors");
 const routes = require('./routers')
 const express = require("express");
 const logwriter=require('./logwriter')
+
+
 const app = express();
 const port = 3000;
 const corsOptions ={
@@ -21,6 +23,8 @@ app.use(cors(corsOptions))
 app.listen(port, () => {
     logwriter.ServerLogWriter(`Example app listening on port ${port}`)
 })
+
+
 app.use("/api", routes);
 
 module.exports = app;

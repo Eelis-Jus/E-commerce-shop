@@ -13,45 +13,16 @@ const { json } = require('express')
 
 const jwtMaker = (req,res) => { 
     const user_email = req.query.user_email;
-    pool.query('SELECT * FROM "user" WHERE user_email = $1', [user_email], (error, results) => {
-        if (error) {
-            logwriter.ErrorLogWriter(error)
-            throw error
-        }
-
-        const userid = results.rows[0].userid    
-        const userEmail=results.rows[0].user_email;
-        const userName=results.rows[0].username;
-        const FirstName=results.rows[0].firstname;
-        const LastName=results.rows[0].lastname;    
-
-        const user={userid: userid, email: userEmail, username: userName, firstname: FirstName, lastname: LastName};
-        const accessToken = generateAccessToken(user)
-        const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)     
-        res.cookie('token', accessToken, { httpOnly: true });
-        res.cookie('refreshtoken', refreshToken, {httpOnly: true});
-        res.json({ accessToken: accessToken, refreshToken: refreshToken });
-    })
-}
-
-function authenticateToken(req,res,next){
-    const authHeader = req.headers['authorization']
-    const token = authHeader && authHeader.split(' ')[1]
-    if(token==null) return res.sendStatus(401)
-
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET,(err, user) => {
-        if (err) return res.sendStatus(403)
-        req.user = user
-        next()
-    })
+        const user={email: user_email};
+        const accessToken = generateAccessToken(user);   
+        res.json({ accessToken: accessToken});
 }
 
 function generateAccessToken(user){
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '10m'})
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15m'})
 }
 
 module.exports={
     jwtMaker,
-    authenticateToken,
     generateAccessToken
 }

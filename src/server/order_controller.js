@@ -36,14 +36,14 @@ const getOrderById = (req, res) => {
 }
 
 const createOrder = (req, res) => {
-    const { itemid, userid, order_price, firstname, lastname, postnumber, homeaddress, email} = req.body;
-    pool.query('INSERT INTO "orders" (itemid, userid, order_price) VALUES ($1, $2, $3)', [itemid, userid, order_price, firstname, lastname, postnumber, homeaddress, email], (error, results) => {
+    const { userid, order_price, firstname, lastname, postnumber, homeaddress, email, items } = req.body;
+    pool.query('INSERT INTO "orders" ( userid, order_price, firstname, lastname, postnumber, homeaddress, email, items) VALUES ($1, $2, $3,$4,$5,$6,$7,$8)', [ userid, order_price, firstname, lastname, postnumber, homeaddress, email,items], (error, results) => {
         if (error) {
             logwriter.ErrorLogWriter(error)
             throw error
         }
         logwriter.ServerLogWriter('order added succesfully');
-        res.status(201).send("Order added");
+        res.status(201).send("order added");
     })
 }
 

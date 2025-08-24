@@ -8,10 +8,7 @@ import { characterlimiter } from '../TextInputFunctions';
 /*
 TODO: 
 -include ability to backspace for all the inputs
--hash sensitive data(passwords, homeaddressess etc...)
 -add space after 4 characters in card pan
-
-
 */
 
 const Register = () => {
@@ -33,6 +30,8 @@ const Register = () => {
   const isEqualsPasswords = useRef(false)  //check if the passwords match in the register form
   const EmailOrUsernameInUse = useRef(true) //this is used so that the checks(if statements) in useEffect are bit easier to read
 
+  
+
   const cardpanSpaceAddPlaces=[4,8,12]
 
   let subStr='/';
@@ -42,8 +41,11 @@ const Register = () => {
 
   const emailAtCheck = (email) =>{
     if(email.includes("@")){
+      console.log("returns true")
       return true;
     }else{
+      console.log("return false")
+      Seterrortext("email must include @")
       return false;
     }
   }
@@ -53,20 +55,20 @@ const Register = () => {
     if(cardexpiration.length==4){
       Setcardexpiration([cardexpiration.slice(0, pos), subStr, cardexpiration.slice(pos)].join(''))
     }
-   
+   /*
     if(cardpan.length==cardpanSpaceAddPlaces[0] ){
       let whitespace=' ';
       let position=4;
       Setcardpan([cardexpiration.slice(0, position), whitespace, cardexpiration.slice(position)].join(''))
     }
-      
+     */ 
   })
 
 
 
-  const loginfunc = async() =>{  //hash the password todo
+  const loginfunc = async() =>{  
   handleSubmit();    
-  passwordAndEmailcheck();
+//  passwordAndEmailcheck();
 
   if(isEqualsPasswords.current==true && EmailOrUsernameInUse.current==false){
     const response = fetch("http://localhost:3000/api/user/adduser", {
@@ -87,7 +89,7 @@ const Register = () => {
                 lastname: `${lastname}`,
       })
   }).then(response => response.json())
-    .then(data => console.log(data+" http code: "+data.response ))
+   // .then(data => console.log(data+" http code: "+data.response ))
     .catch(error => console.error('POST request failed:', error));
 
   if (response?.ok) {
@@ -98,43 +100,49 @@ const Register = () => {
 
   Seterrortext("Registeration successful");
   navigate("/");
-}
+}}  
 
-  }  
-
-
-
- const passwordAndEmailcheck = async() => {
+ const passwordAndEmailcheck = () => { //check the current states of isEqualsPasswords and EmailOrUsernameInUse
   if(isEqualsPasswords.current==false && EmailOrUsernameInUse.current==true){      
     Seterrortext("username and/or email already in use and passwords do not match");     
-   // buttonpressed.current=false
   }
 
   if(isEqualsPasswords.current==false && EmailOrUsernameInUse.current==false){
     Seterrortext("Passwords do not match");
-  //  buttonpressed.current=false
   }  
 
   if(isEqualsPasswords.current==true && EmailOrUsernameInUse.current==true){
+    console.log("isEqualsPasswords is "+isEqualsPasswords.current)
+    console.log("EmailOrUsernameInUse is "+EmailOrUsernameInUse.current)
     Seterrortext("username and/or email already in use");
-  //  buttonpressed.current=false
   }
 };
 
 
 
-  const nameCheck = async () => {
+  const nameCheck = async () => {  //check if there are same usernames in db
     try {
-      const response = await fetch("http://localhost:3000/api/user/usernamecheck?username="+userName);
-      if (!response.ok) {
+      const usernameresponse = await fetch("http://localhost:3000/api/user/usernamecheck?username="+userName);
+      const emaildata = await fetch("http://localhost:3000/api/user/emailcheck?email="+userEmail);
+      if (!usernameresponse.ok) {
         throw new Error('Network response was not ok');
       }
-      const jsonResponse = await response.json();
+      if (!emaildata.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const emailresponse = await emaildata.json();
+      const jsonResponse = await usernameresponse.json();
       console.log("namecheck stringify jsonresponse: "+JSON.stringify(jsonResponse))
-      if(JSON.stringify(jsonResponse)==='[]'){
-        usernameInuse.current=false
+      console.log("email stringify jsonresponse: "+JSON.stringify(emailresponse))
+      if(JSON.stringify(jsonResponse)==='[]' && JSON.stringify(emailresponse)==='[]'){
+        EmailOrUsernameInUse.current=false;
+      //  emailInuse.current=false;
+      }else if (JSON.stringify(jsonResponse)!='[]' && JSON.stringify(emailresponse)==='[]'){
+        EmailOrUsernameInUse.current=true;
+      }else if(JSON.stringify(jsonResponse)==='[]' && JSON.stringify(emailresponse)!='[]'){
+        EmailOrUsernameInUse.current=true;
       }else{
-        usernameInuse.current=true
+        EmailOrUsernameInUse.current=true;
       }
 
     }catch(error) {
@@ -143,8 +151,8 @@ const Register = () => {
   }  
   
 
-
-  const emailCheck = async () => {
+/*
+  const emailCheck = async () => { //check if there are same emails in db
     try {
       const response = await fetch("http://localhost:3000/api/user/emailcheck?email="+userEmail);
       if (!response.ok) {
@@ -157,29 +165,32 @@ const Register = () => {
       }else{
         emailInuse.current=true
       }
-
+    console.log("email is already in use: "+emailInuse.current)
     }catch (error) {
       console.error('Email request failed:', error);
     }
   }  
 
-
+*/
 const handleSubmit = async () => {
-  let emailIncludesAt = emailAtCheck(userEmail);
-  if(emailIncludesAt==true){ 
+  let emailIncludesAt = emailAtCheck(userEmail); //emailIncludesAt means does email include @
+  console.log("email at "+emailIncludesAt)
+  if(emailIncludesAt===true){ 
     nameCheck();
-    emailCheck();
+    /*
     if(usernameInuse.current==true || emailInuse.current==true){
       EmailOrUsernameInUse.current=true;
     }else{
       EmailOrUsernameInUse.current=false;
     }
+      */
     if(Password===passwordAgain){ //check if the passwords match on registeration
       isEqualsPasswords.current=true;  
+      console.log("are passwords equal: "+isEqualsPasswords.current)
     }else{
       isEqualsPasswords.current=false;
     }
-  // buttonpressed.current=true;
+    passwordAndEmailcheck();
   }else{
     Seterrortext("email must include @")
   }

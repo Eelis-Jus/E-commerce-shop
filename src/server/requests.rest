@@ -1,0 +1,10 @@
+GET http://localhost:3000/api/jwt/test Authorization: Bearer 
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBhc3N3b3JkQHRlc3QiLCJpYXQiOjE3NTUzNzE0MjcsImV4cCI6MTc1NTM3MjAyN30.reLm6fObXrEP6iaNhKbMBQ0H9OXZNOpJf9JZ9ewqACw
+###
+
+POST http://localhost:3000/api/jwt/make?user_email=password@test
+
+###
+GET http://localhost:3000/posts Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBhc3N3b3JkQHRlc3QiLCJpYXQiOjE3NTUzNzM0NjQsImV4cCI6MTc1NTM3NDA2NH0.kSX_PA7ZaFw9JLzQxRXTDa8xPeHcqjO_blHVUDoqQ1k
+###
+GET http://localhost:3000/api/item

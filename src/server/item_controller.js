@@ -79,19 +79,19 @@ const createItem = (req, res) => {
             throw error
         }
         logwriter.ServerLogWriter('item added succesfully');
-        res.status(201).send("item added");
+        res.status(201).json("item added");
     })
 }
 
 const deleteItem = (req, res) => {
-    const id = parseInt(req.params.id)
-    pool.query('DELETE FROM "item" WHERE itemid = $1', [id], (error, results) => {
+    const  itemname  = req.query.itemname;
+    pool.query('DELETE FROM item WHERE item_name = $1', [itemname], (error, results) => {
         if (error) {
             logwriter.ErrorLogWriter(error)
             throw error
         }
-        logwriter.ServerLogWriter(`item with id: ${id} deleted succesfully`);
-        res.status(201).send("Item deleted");
+        logwriter.ServerLogWriter(`item with name: ${itemname} deleted succesfully`);
+        res.status(204).json("Item deleted");
     })
 }
 

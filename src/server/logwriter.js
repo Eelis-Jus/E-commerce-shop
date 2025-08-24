@@ -56,12 +56,13 @@ const ErrorLogWriter = (Errorlog) =>{
   const errorWriter = fs.createWriteStream('../server/server_logs/error.log', {flags : 'a'});    //try flags a, so that it makes the file even if it doesn't exist
   const errorMessage = currentTimeAndDate+ " | "+ Errorlog+"\n";
 
-  errorWriter.write(errorMessage)
+  errorWriter.write(errorMessage+"\r\n")
   errorWriter.end()
 
   // Handle finish event
   errorWriter.on('finish', () => {
-    console.log('Write completed.')
+    console.log(currentTimeAndDate)
+    console.log('Error write completed.')
   })
 
   // Handle error event

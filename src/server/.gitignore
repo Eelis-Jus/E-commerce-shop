@@ -6,6 +6,7 @@
 /pictures
 # testing
 /coverage
+/server_logs/server.log
 
 # production
 /build

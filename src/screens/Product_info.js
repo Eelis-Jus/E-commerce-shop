@@ -92,22 +92,7 @@ const addToCart = async() =>{
             
             </li>
             </ul>
-            <ul className='UserReviewsAndAddUserReviews'>
-              <li>
-            <div className="AddUserReview">
-              <h1 className='UserName'>review adder username placeholder</h1>
-              <textarea className='ReviewText'></textarea>
-              <button>add review</button>
-            </div>
-            </li>
 
-            <li>
-            <div className="UserReviews">
-              <h1 className='UserName'>username placeholder</h1>
-              <text className='Review'>{testString}</text>
-            </div>
-            </li>
-            </ul>
           </div>
         </div>
     );
