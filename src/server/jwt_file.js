@@ -1,5 +1,5 @@
 //here we make function that return the jwt with all of the users infromation
-//https://stackoverflow.com/questions/52781477/expected-payload-to-be-a-plain-object-mean
+
 
 /*
 TODO:
